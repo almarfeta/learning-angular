@@ -1,0 +1,69 @@
+<!--Interpolation example: you can assign a variable from the ts file in the html using {{}}-->
+<!--You can type an expression inside the brackets and it will be evaluated, but you cannot assign something-->
+<p>Welcome {{name}}</p>
+
+<!--You can have interpolation inside an attribute-->
+<p id="{{exampleId}}">A paragraph with id</p>
+
+<!--However there is a limitation, you can only assign string values as html attributes-->
+<!--You cannot have a switch variable to enable/disable a button using interpolation-->
+<button disabled>A disabled button</button>
+<!--But you can use property binding-->
+<button [disabled]="idDisabled">A disabled button</button>
+<!--Attributes initialize DOM properties and then they are done.
+Attribute values cannot change once they are initialized.
+Property values however can change-->
+
+<!--Event binding: if an event occurs (like a mouse click) you can capture that on the ts class-->
+<button (click)="onClickCount()">Click me!</button>
+<p>You clicked the button {{counter}} time(s)</p>
+
+<input #myInput type="text">
+<button (click)="alertMessage(myInput.value)">Alert the message</button>
+
+<!--Two way binding: when we update a value we want it to be updated on the ts class as well and vice versa-->
+<input [(ngModel)]="email" type="text">
+<p>The email typed above is: {{email}}</p>
+
+<!--ngIf: adds an element to the DOM if a certain condition is true-->
+<h2 *ngIf="true">This h2 might be hidden because of ngIf</h2>
+
+<div *ngIf="false; then thenBlock; else elseBlock"></div>
+<ng-template #thenBlock>
+  <h2>This is shown when ngIf is true</h2>
+</ng-template>
+<ng-template #elseBlock>
+  <h2>This is shown when ngIf is false</h2>
+</ng-template>
+
+<!--ngSwitch: similar to ngIf-->
+<input #colorInput type="text" placeholder="color">
+<button (click)="assignColor(colorInput.value)">Assign color</button>
+<div [ngSwitch]="color">
+  <p *ngSwitchCase="'red'" style="color: red">You picked red</p>
+  <p *ngSwitchCase="'blue'" style="color: blue">You picked blue</p>
+  <p *ngSwitchCase="'green'" style="color: green">You picked green</p>
+  <p *ngSwitchDefault>You didn't pick a color</p>
+</div>
+
+<!--ngFor: helps to render a list of elements-->
+<div *ngFor="let color of colors; index as i">
+  <p [style.color]="color">{{i + 1}}) This paragraph is {{color}}</p>
+</div>
+
+<!--Component interaction: you can send information from a parent component to child and vice versa-->
+<p>This data comes from app component and is rendered in test component: {{title}}</p>
+
+<button (click)="fireEvent()">Send from child to parent</button>
+
+<!--Pipes: allow you to apply a function before it is rendered to the view-->
+<h2>{{name}}, {{name | lowercase}}, {{name | uppercase}}, {{name | titlecase}}, {{name | slice:3:5}}</h2>
+<h2>{{person | json}}</h2>
+<h2>{{5.678 | number:'1.2-3'}}</h2>
+<h2>{{5.678 | number:'3.4-5'}}</h2>
+<h2>{{5.678 | number:'3.1-2'}}</h2>
+<h2>{{0.25 | percent}}</h2>
+<h2>{{0.25 | currency:'EUR'}}</h2>
+<h2>{{date | date:'short'}}</h2>
+<h2>{{date | date:'shortDate'}}</h2>
+<h2>{{date | date:'shortTime'}}</h2>

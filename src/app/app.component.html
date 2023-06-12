@@ -1,0 +1,17 @@
+<div style="text-align: center">
+  <h1>From app component</h1>
+</div>
+
+<app-test [parentData]="title" (childEvent)="messageFromChild=$event"></app-test>
+<p>{{messageFromChild}}</p>
+
+<!--Routing-->
+<nav>
+  <a routerLink="">Home</a>
+  <br>
+  <a routerLink="/employees">Employees</a>
+  <br>
+  <a routerLink="/test">A route that doesn't exist</a>
+</nav>
+
+<router-outlet></router-outlet>

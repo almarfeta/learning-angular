@@ -1,0 +1,4 @@
+<h3>{{errorMsg}}</h3>
+<div *ngFor="let employee of employees">
+  <p (click)="onSelect(employee)">{{employee | json}}</p>
+</div>
